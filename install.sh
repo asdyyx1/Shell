@@ -138,23 +138,6 @@ install_soga() {
     wget -N --no-check-certificate -O /etc/systemd/system/soga@.service https://raw.githubusercontent.com/asdyyx1/Shell/soga/soga%40.service
     systemctl daemon-reload
     systemctl stop soga
-    systemctl enable soga
-    echo -e "${green}soga v${last_version}${plain} 安装完成，已设置开机自启"
-    if [[ ! -f /etc/soga/soga.conf ]]; then
-        cp soga.conf /etc/soga/
-        echo -e ""
-        echo -e "全新安装，请先参看教程：https://soga.vaxilu.com/，配置必要的内容"
-    else
-        systemctl start soga
-        sleep 2
-        check_status
-        echo -e ""
-        if [[ $? == 0 ]]; then
-            echo -e "${green}soga 重启成功${plain}"
-        else
-            echo -e "${red}soga 可能启动失败，请稍后使用 soga log 查看日志信息"
-        fi
-    fi
 
     if [[ ! -f /etc/soga/blockList ]]; then
         cp blockList /etc/soga/
@@ -169,25 +152,6 @@ install_soga() {
     chmod +x /usr/bin/soga
     curl -o /usr/bin/soga-tool -Ls https://raw.githubusercontent.com/vaxilu/soga/master/soga-tool-${arch}
     chmod +x /usr/bin/soga-tool
-    echo -e ""
-    echo "soga 管理脚本使用方法: "
-    echo "------------------------------------------"
-    echo "soga                    - 显示管理菜单 (功能更多)"
-    echo "soga start              - 启动 soga"
-    echo "soga stop               - 停止 soga"
-    echo "soga restart            - 重启 soga"
-    echo "soga status             - 查看 soga 状态"
-    echo "soga enable             - 设置 soga 开机自启"
-    echo "soga disable            - 取消 soga 开机自启"
-    echo "soga log                - 查看 soga 日志"
-    echo "soga update             - 更新 soga"
-    echo "soga update x.x.x       - 更新 soga 指定版本"
-    echo "soga config             - 显示配置文件内容"
-    echo "soga config xx=xx yy=yy - 自动设置配置文件"
-    echo "soga install            - 安装 soga"
-    echo "soga uninstall          - 卸载 soga"
-    echo "soga version            - 查看 soga 版本"
-    echo "------------------------------------------"
 }
 
 echo -e "${green}开始安装${plain}"
