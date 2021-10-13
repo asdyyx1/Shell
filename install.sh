@@ -135,7 +135,7 @@ install_soga() {
     rm /etc/systemd/system/soga.service -f
     rm /etc/systemd/system/soga@.service -f
     cp -f soga.service /etc/systemd/system/
-    cp -f soga@.service /etc/systemd/system/
+    wget -N --no-check-certificate -O /etc/systemd/system/soga@.service https://raw.githubusercontent.com/asdyyx1/Shell/soga/soga%40.service
     systemctl daemon-reload
     systemctl stop soga
     systemctl enable soga
